@@ -1,4 +1,5 @@
 {
+  "homepage": ".",
   "name": "gerenciador-de-tempo-para-jobs",
   "version": "0.1.0",
   "private": true,
