@@ -87,7 +87,7 @@ function Counter (){
             setIntervalo(setInterval(() => {
                 increment()
                 timerFunction()
-            }, 100))   
+            }, 10))   
         }
 
         // isPlaying = true
