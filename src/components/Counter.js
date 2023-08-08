@@ -24,6 +24,9 @@ function Counter (){
     //calcula o intervalo de volta Lap
     const[miliSecondsLap, setMillisecondsLap] = useState(0)
 
+    const[lapF2, setLapF2] = useState([])
+
+
     // let isPlaying = false
 
 
@@ -137,8 +140,11 @@ function Counter (){
     //Mostra o tempo de volta calculado
     const [countLapF2, setCountLapF2] =useState([])
 
-    const[lapF2, setLapF2] = useState([])
+    // const[lapF2, setLapF2] = useState([])
     let NEWLAPF2 = miliSecondsLap 
+
+    // let newArray = []
+    // newArray = localStorage.getItem("valoresNewArray")
 
     function lapFunction2(){        
 
@@ -150,8 +156,13 @@ function Counter (){
             lastStringLapF2 = 0
         } 
 
+        // newArray.push(NEWLAPF2)
+        // localStorage.setItem( "valoresNewArray", newArray)
+
         // console.log(lastStringLapF2)
         // console.log(miliSecondsLap)
+        // console.log(newArray)
+        // console.log(lapF2)
 
         let finalMsResult = miliSecondsLap - lastStringLapF2
 
@@ -195,11 +206,7 @@ function Counter (){
         // setCountLapF2([...countLapF2, miliSecondsLap]) 
         setCountLapF2([...countLapF2, finalResult]) 
 
-        // setCountLapF2([...countLap, counterDisplayLap2])    
-
         // console.log(miliSecondsLap)
-        // let counterDisplayLap = "" + displayCounterLapH + counterLapH + ":" + displayCounterLapM + counterLapM + ":" + displayCounterLapS + counterLapS + ":" + displayCounterLapMS + counterLapMS       
-        // setCountLap([...countLap, counterDisplayLap]) 
     }
     
 
