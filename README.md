@@ -1,1 +1,1 @@
-gerenciador de tempo de trabalho para jobs
+Cronômetro com contador de voltas feito com react

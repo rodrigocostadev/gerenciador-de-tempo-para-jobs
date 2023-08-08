@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+// import Laps from "./Laps";
+// import LapClass from "./LapClass";
+import ListLaps from "./ListLaps";
 
 
 
@@ -18,16 +21,21 @@ function Counter (){
 
     const [intervalo, setIntervalo] = useState()
 
-    let lap
+    //calcula o intervalo de volta Lap
+    const[miliSecondsLap, setMillisecondsLap] = useState(0)
+
     // let isPlaying = false
+
 
     useEffect(() => {
         timerFunction()
+        // lapFunction()
     },[miliSeconds])
+
 
     function timerFunction(){   
         
-        //Mili Seconds
+        // Mili Seconds
         if (miliSeconds >= 10){
             setDisplayMiliSeconds("")
         }else if(miliSeconds < 10){
@@ -73,6 +81,7 @@ function Counter (){
     function increment(){
         // setSeconds((prevSeconds) => prevSeconds + 1  )
         setMIliSeconds((prevMiliSeconds) => prevMiliSeconds + 1  )
+        setMillisecondsLap((prevMiliSecondsLap) => prevMiliSecondsLap + 1  )
     }
 
     // function playPause(){
@@ -80,10 +89,12 @@ function Counter (){
     //     isPlaying? play() : pause()
     // }
 
-    function play(){      
+
+    function play(){              
 
         // Elimina a execução em paralelo de outras funções contadoras, assim DEIXANDO DE ACELERAR O CONTADOR
         if(!intervalo){
+
             setIntervalo(setInterval(() => {
                 increment()
                 timerFunction()
@@ -91,14 +102,9 @@ function Counter (){
         }
 
         // isPlaying = true
-        
-        // setIntervalo(setInterval(() => {
-        //     increment()
-        //     timerFunction()
-        // }, 1000))
     }
 
-    function pause(){       
+    function pause(){
         
         // Elimina a execução em paralelo de outras funções contadoras, assim DEIXANDO DE ACELERAR O CONTADOR
         if(intervalo){
@@ -107,7 +113,6 @@ function Counter (){
         }
 
         // isPlaying = false
-        // clearInterval(intervalo)
     }
 
     function reset(){
@@ -120,17 +125,112 @@ function Counter (){
         setDisplayMinutes(0)
         setHours(0)
         setDisplayHours(0)
-        setIntervalo()
+        // setIntervalo()
         timerFunction()
+        // setLap([])
+        setCountLapF2([])
     }
 
-    function lapFunction(){
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////// 2 TENTATIVA CALCULAR VOLTA COM MILISECONDSLAP /////////////////////////////////////////////////
 
-        lap = ("" + displayHours + hours + ":" + displayMinutes + minutes + ":" + displaySeconds + seconds + ":" + displayMiliSeconds + miliSeconds)
+    //Mostra o tempo de volta calculado
+    const [countLapF2, setCountLapF2] =useState([])
 
-        console.log(lap)        
-        
+    const[lapF2, setLapF2] = useState([])
+    let NEWLAPF2 = miliSecondsLap 
+
+    function lapFunction2(){        
+
+        setLapF2([...lapF2,NEWLAPF2])
+
+        let lastStringLapF2 = lapF2.pop()  
+
+        if(lastStringLapF2 == undefined){
+            lastStringLapF2 = 0
+        } 
+
+        // console.log(lastStringLapF2)
+        // console.log(miliSecondsLap)
+
+        let finalMsResult = miliSecondsLap - lastStringLapF2
+
+        // tive que transformar numero ( intervalo de volta, ou milisecondsLap )em string para pegar os 2 ultimos digitos 
+        let miliSecondsF2 = String(finalMsResult).slice(-2)
+        let secondsF2 = Math.floor(finalMsResult / 100)
+        let minutesF2 = Math.floor(secondsF2 / 60)
+        let hoursF2 = Math.floor(minutesF2 / 60)
+        let secondsRest = secondsF2 % 60
+
+        //variaveis responsaveis por ser 0 se o contador for menor do que 10
+        let DisplayMiliSecondsF2
+        let DisplaySecondsF2
+        let DisplayMinutesF2
+        let DisplayHoursF2
+
+        //Miliseconds
+        if(miliSecondsF2 < 10){
+            DisplayMiliSecondsF2 = 0
+        }else{ DisplayMiliSecondsF2 = ""}
+
+        //Seconds
+        if(secondsF2 < 10){
+            DisplaySecondsF2 = 0
+        }else{ DisplaySecondsF2 = ""}
+
+        //Minutes
+        if(minutesF2 < 10){
+            DisplayMinutesF2 = 0
+        }else{ DisplayMinutesF2 = ""}
+
+        //Hours
+        if(hoursF2 < 10){
+            DisplayHoursF2 = 0
+        }else{ DisplayHoursF2 = ""}
+
+        let finalResult = "" + DisplayHoursF2 + hoursF2 + " : " + DisplayMinutesF2 + minutesF2 + " : " + DisplaySecondsF2 + secondsRest + " : " + DisplayMiliSecondsF2 + miliSecondsF2
+
+        console.log(finalMsResult)
+
+        // setCountLapF2([...countLapF2, miliSecondsLap]) 
+        setCountLapF2([...countLapF2, finalResult]) 
+
+        // setCountLapF2([...countLap, counterDisplayLap2])    
+
+        // console.log(miliSecondsLap)
+        // let counterDisplayLap = "" + displayCounterLapH + counterLapH + ":" + displayCounterLapM + counterLapM + ":" + displayCounterLapS + counterLapS + ":" + displayCounterLapMS + counterLapMS       
+        // setCountLap([...countLap, counterDisplayLap]) 
     }
+    
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////// Aqui ficava a função lapfunction antiga juntamente com as variaveis anteriores a ela  /////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     return(
@@ -138,12 +238,325 @@ function Counter (){
             <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} : {displayMiliSeconds}{miliSeconds}</h1>
             <button onClick={play}>Play</button>
             <button onClick={pause} >Pause</button>
+            <button onClick={lapFunction2} > Lap </button>
             {/* <button onClick={playPause} >Play</button> */}
-            <button onClick={reset} >Reset</button>
-            <button onClick={lapFunction}> Lap </button>
+            <button onClick={reset} >Reset</button>            
+            {/* <button onClick={lapFunction} > Lap </button> */}
+            {/* <p>{lap}</p> */}
+            {/* <ListLaps lap = {lap}  ></ListLaps> */}
+            {/* <ListLaps countLap = {countLap}  ></ListLaps> */}
+            <ListLaps countLapF2 = {countLapF2}  ></ListLaps>
         </div>
     )
     
 }
 
 export default Counter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////  Função lap function antiga juntamente com as variaveis anteriores   /////////////////////////////////////////////////////
+
+    // // mostra o tempo de volta sem ser calculado, tempo do relogio contador
+    // const[lap, setLap] = useState([])
+    // let NEWLAP = "" + displayHours + hours + ":" + displayMinutes + minutes + ":" + displaySeconds + seconds + ":" + displayMiliSeconds + miliSeconds
+
+    // // Pega o tempo atual para diminuir   ////////////////////////////////AQUI ESTA O PRPBLEMA COM O 0, NO DISPLAY QUE FICA NA FRENTE
+    // // let lastTimeMS = displayMiliSeconds + miliSeconds
+    // // let lastTimeS = displaySeconds + seconds
+    // // let lastTimeM = displayMinutes + minutes
+    // // let lastTimeH = displayHours + hours
+    // // let NEWLAP = lastTimeH + lastTimeM + lastTimeS + lastTimeMS
+
+    // let lastTimeMS = miliSeconds
+    // let lastTimeS = seconds
+    // let lastTimeM = minutes
+    // let lastTimeH = hours      
+
+    // //Mostra o tempo de volta calculado
+    // const [countLap, setCountLap] =useState([])
+
+    // const [displayCounterLapH, setDisplayCounterLapH] = useState(0)
+    // // const [counterLapH, setCounterLapH] = useState(0)
+    // const [displayCounterLapM, setDisplayCounterLapM] = useState(0)
+    // // const [counterLapM, setCounterLapM] = useState(0)
+    // const [displayCounterLapS, setDisplayCounterLapS] = useState(0)
+    // // const [counterLapS, setCounterLapS] = useState(0)                /// criar como outro nome
+    
+    // const [displayCounterLapMS, setDisplayCounterLapMS] = useState(0)
+    // // const [counterLapMS, setCounterLapMS] = useState(0)
+    // // counterLapMS
+
+    // function lapFunction(){
+
+    //     // let newLap = new LapClass (lap)
+    //     setLap([...lap,NEWLAP])
+
+
+    //     /////////   PEGA A ULTIMA STRING DO ARRAY DE VOLTAS : LAP " sem calcular volta"  ////////
+    //     let lastStringLap = lap.pop()    
+    //     // let lastStringLap = lap[lap.length - 1]   
+
+
+    //     // DEFINIR COMO INICIAL PARA SUBTRAIR
+    //     function subNewlap(){        
+    //         if(lastStringLap == undefined){
+    //             lastStringLap = "00:00:00:00"
+    //         }                      
+    //     }
+    //     subNewlap()
+        
+    //     //PEGA OS NUMEROS DAS STRINGS
+    //     // let previousTimeMS = lastStringLap.substring(9,11)
+    //     // let previousTimeS = lastStringLap.substring(6,8)
+    //     // let previousTimeM = lastStringLap.substring(3,5)
+    //     // let previousTimeH = lastStringLap.substring(0,2) 
+    //     // let previousTimeMS = lastStringLap.substring(lastStringLap.length - 2)
+
+    //     let previousTimeMS = parseInt(lastStringLap.substring(9,11))
+    //     let previousTimeS = parseInt(lastStringLap.substring(6,8))
+    //     let previousTimeM = parseInt(lastStringLap.substring(3,5))
+    //     let previousTimeH = parseInt(lastStringLap.substring(0,2) )
+
+    //     //////////////////////////////////////////////corrigir /////////////////////////////////////////////////////////////////
+    //     let counterLapH = lastTimeH - previousTimeH
+    //     let counterLapM = lastTimeM - previousTimeM
+    //     let counterLapS = lastTimeS - previousTimeS 
+    //     // let counterLapH = null
+    //     // let counterLapM = null
+    //     // let counterLapS = null
+    //     let counterLapMS = lastTimeMS - previousTimeMS  
+
+    //     //CONTADOR DE VOLTAS (CALCULANDO)
+    //     //Hours
+    //     // if(lastTimeH < previousTimeH){
+    //     //     // previousTimeH = "00"
+    //     //     // counterLapH = (100 - parseInt(previousTimeH)) + parseInt(lastTimeH)
+    //     //     counterLapH = (100 - previousTimeH) + parseInt(lastTimeH)
+    //     // } 
+
+
+    //     //Minutes
+    //     if(lastTimeM < previousTimeM){
+    //         // previousTimeM = "00"
+    //         // counterLapM = (100 - parseInt(previousTimeM)) + parseInt(lastTimeM)
+    //         counterLapM = (60 - previousTimeM) + parseInt(lastTimeM)
+    //     }
+    //     //Seconds
+    //     if(lastTimeS < previousTimeS){
+    //         // previousTimeS = "00"
+    //         // counterLapS = (100 - parseInt(previousTimeS)) + parseInt(lastTimeS)
+    //         counterLapS = (60 - previousTimeS) + parseInt(lastTimeS)
+    //     }        
+    //     // Mili Seconds
+    //     if(lastTimeMS < previousTimeMS){
+    //         // previousTimeMS = "00"
+    //         // counterLapMS = previousTimeMS - lastTimeMS  
+    //         // counterLapMS = (100 - parseInt(previousTimeMS)) + parseInt(lastTimeMS)
+    //         counterLapMS = (100 - previousTimeMS) + parseInt(lastTimeMS)
+    //     }         
+        
+    //     console.log(lastTimeS)
+    //     console.log(previousTimeS)
+    //     // console.log(counterLapMS)
+    //     // console.log( toString(lastTimeMS) + 100 )
+
+    //     //Hours
+    //     if (counterLapH >= 10){
+    //         setDisplayCounterLapH("")
+    //     }else if(counterLapH < 10){
+    //         setDisplayCounterLapH("0")
+    //     }
+
+    //     //Minutes
+    //     if (counterLapM >= 10){
+    //         setDisplayCounterLapM("")
+    //     }else if(counterLapM < 10){
+    //         setDisplayCounterLapM("0")
+    //     }
+
+    //     //Seconds
+    //     if (counterLapS >= 10){
+    //         setDisplayCounterLapS("")
+    //     }else if(counterLapS < 10){
+    //         setDisplayCounterLapS("0")
+    //     }
+    //     // if (counterLapS == 60){
+    //     //     setCounterLapM((prevsetCounterLapM) => prevsetCounterLapM + 1  )
+    //     //     setCounterLapS(0)
+    //     // }
+
+    //     //Mili Seconds
+    //     if (counterLapMS >= 10){
+    //         setDisplayCounterLapMS("")
+    //     }else if(counterLapMS < 10){
+    //         setDisplayCounterLapMS("0")
+    //     }
+
+    //     // if (counterLapMS > 100){
+    //     //     counterLapS = 0
+    //     // }
+
+
+
+       
+    //     if (counterLapM < 60 && counterLapH > 0 ){
+    //         counterLapH = 0
+    //     }
+    //     if (counterLapM == 60){
+    //         counterLapH ++
+    //         counterLapM = 0
+    //     }
+
+
+        
+    //     if (counterLapS < 60 && counterLapM > 0 ){
+    //         counterLapM = 0
+    //     }
+    //     if (counterLapS == 60){
+    //         counterLapM ++
+    //         counterLapS = 0
+    //     }
+
+
+        
+    //     // if (counterLapMS == 100){
+    //     //     counterLapS ++
+    //     //     counterLapMS = 0
+    //     //     // setCounterLapS((prevsetCounterLapS) => prevsetCounterLapS + 1  )
+    //     //     // setCounterLapS(+1)
+    //     // } 
+        
+    //     //se os milisegundos forem menores que 100 e os segundos menores que 0, segundos igual a 0.
+    //     //Isso é a correção de um bug, que quando o contador passava de 100 MS (o que seria 1 segundo) e o intervalo (volta) 
+    //     // era de alguns MS e tambem era menor que 1 segundo, ele adicionava 1 segundo, 
+    //     // fazendo com que a conta não fechasse ao somar todas as voltas comparando com o tempo do contador
+    //     if (counterLapMS < 99 && counterLapS > 0 ){
+    //         counterLapS = 0
+    //     } else if (counterLapMS == 100){
+    //         counterLapS ++
+    //         counterLapMS = 0
+    //     }
+
+
+    //     // console.log(counterLapMS)
+    //     console.log(counterLapS)
+
+
+    //     // if (counterLapMS < 10){
+    //     //     setDisplayCounterLapMS("0")
+    //     // }else{
+    //     //     setDisplayCounterLapMS("")
+    //     // }
+
+
+
+
+    //     // if (counterLapMS == 100){
+    //     //     counterLapMS = 0
+    //     //     counterLapS ++
+    //     //     // setDisplayMiliSeconds(0)
+    //     //     // setMIliSeconds(0)
+    //     //     // setSeconds((prevSeconds) => prevSeconds + 1)
+    //     //     // // setMIliSeconds((prevMinutes) => prevMinutes + 1  )
+    //     //     // setDisplaySeconds(0)     
+    //     // }
+
+    //     ////////////////////////////// problemas nos displaycounterlap... //////////////////////////////////////////////
+    //     let counterDisplayLap = "" + displayCounterLapH + counterLapH + ":" + displayCounterLapM + counterLapM + ":" + displayCounterLapS + counterLapS + ":" + displayCounterLapMS + counterLapMS
+
+        
+
+        
+
+    //     setCountLap([...countLap, counterDisplayLap])
+
+
+    //     // console.log(counterDisplayLap)
+    //     // console.log(countLap)
+    //     // console.log(lastStringLap)
+        
+
+    //     // console.log(lapMS)
+    //     // console.log(lapH)    
+
+
+
+    //     // let subNewlap = NEWLAP - lastStringLap
+
+    //     // console.log(lastStringLap.substring(9,11))
+
+    //     // console.log(maiorValor)
+    //     // console.log(lastStringLap)
+    //     // console.log(lap)    
+    //     // console.log(lap.findLastIndex())
+    //     // console.log(lastIndexOf(lap))  
+    //     // console.log(NEWLAP)  
+    //     // console.log(maxNumber)
+    //     // console.log(teste3)
+    //     // console.log(teste4)
+        
+        
+
+    //     // let a = "00:00:00:26"
+    //     // let b = "00:00:00:16"
+    //     // let aFormatado = parseInt(a)
+    //     // let bFormatado = parseInt(b)
+
+    //     // console.log(aFormatado)
+    //     // console.log(aFormatado - bFormatado)
+
+
+    //             // addItem()
+
+    //     // O apply funciona como se você tivesse passado os valores do array como parâmetros da função max, 
+    //     // e equivaleria a se digitar Math.max(0,12,13,2.... O primeiro parâmetro equivale ao escopo a ser usado na função, 
+    //     // e neste caso, como é indiferente, passamos null, que representa o escopo global.
+    //     // let maiorValor = Math.max.apply(lap)
+    //     // let menorValor = Math.min.apply(lap)
+    //     // let maxNumber = lap.filter( item => item.Math.max.apply(lap))
+
+    //     // let maxNumber = lap.filter( item => Math.max.apply(item))
+
+        
+        
+    // }
+
+    // // function lapFunction(text){
+    // //     let NEWLAP = new LapClass (text)
+    // //     setLap([...lap, NEWLAP])
+    // //     // console.log(lap)
+    // // }
+
+
+
+    // // return(
+    // //     <div>
+    // //         <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} : {displayMiliSeconds}{miliSeconds}</h1>
+    // //         <button onClick={play}>Play</button>
+    // //         <button onClick={pause} >Pause</button>
+    // //         {/* <button onClick={playPause} >Play</button> */}
+    // //         <button onClick={reset} >Reset</button>
+    // //         <button onClick={lapFunction} > Lap </button>
+    // //         {/* <p>{lap}</p> */}
+    // //         {/* <ListLaps lap = {lap}  ></ListLaps> */}
+    // //         <ListLaps countLap = {countLap}  ></ListLaps>
+    // //     </div>
+    // // )
