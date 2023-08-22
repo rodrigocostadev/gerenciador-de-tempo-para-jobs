@@ -4,6 +4,9 @@
   padding: 2rem;
   text-align: center;
   font-size: 2rem;
+  display: flex;
+  /* align-items:center ; */
+  justify-content: center;
 }
 
 body{
@@ -11,13 +14,25 @@ body{
 }
 
 button{
-  margin-top: 100px;
+  /* margin-top: 100px; */
   padding: 10px;
   font-size: 30px;
-  border-radius: 5px;
-  border-width: 10px;
+  border-radius: 15px;
+  border-width: 8px;
   border-color: blue;
 }
 li{
   list-style: none;
+
+}
+/* .green{
+  color: green;
+} */
+.container{
+  /* position: relative; */
+  /* display: grid; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 150px;
 }

@@ -132,6 +132,8 @@ function Counter (){
         timerFunction()
         // setLap([])
         setCountLapF2([])
+        setMillisecondsLap(0)
+        setLapF2([])
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,10 +142,13 @@ function Counter (){
     //Mostra o tempo de volta calculado
     const [countLapF2, setCountLapF2] =useState([])
 
+    //Guarda o valor da volta em MS para calcular a maior e menor volta no arquivo listLap.js
+    const [ msResult, setMsResult] = useState([])
+
     // const[lapF2, setLapF2] = useState([])
     let NEWLAPF2 = miliSecondsLap 
 
-    // let newArray = []
+    // let newArray 
     // newArray = localStorage.getItem("valoresNewArray")
 
     function lapFunction2(){        
@@ -154,17 +159,24 @@ function Counter (){
 
         if(lastStringLapF2 == undefined){
             lastStringLapF2 = 0
-        } 
+        }         
 
-        // newArray.push(NEWLAPF2)
-        // localStorage.setItem( "valoresNewArray", newArray)
+        let finalMsResult = miliSecondsLap - lastStringLapF2
+
+        // newArray.push([finalMsResult])
+        // console.log(newArray)
+
+        // for(let i=0; i< newArray.length; i++){
+        //     newArray.push(...finalMsResult)
+        //     localStorage.setItem( "valoresNewArray", newArray)
+        // }
+
+        
 
         // console.log(lastStringLapF2)
         // console.log(miliSecondsLap)
         // console.log(newArray)
-        // console.log(lapF2)
-
-        let finalMsResult = miliSecondsLap - lastStringLapF2
+        console.log(lapF2)
 
         // tive que transformar numero ( intervalo de volta, ou milisecondsLap )em string para pegar os 2 ultimos digitos 
         let miliSecondsF2 = String(finalMsResult).slice(-2)
@@ -180,12 +192,12 @@ function Counter (){
         let DisplayHoursF2
 
         //Miliseconds
-        if(miliSecondsF2 < 10){
+        if(miliSecondsF2 == 0){
             DisplayMiliSecondsF2 = 0
         }else{ DisplayMiliSecondsF2 = ""}
 
         //Seconds
-        if(secondsF2 < 10){
+        if(secondsRest < 10){
             DisplaySecondsF2 = 0
         }else{ DisplaySecondsF2 = ""}
 
@@ -199,14 +211,19 @@ function Counter (){
             DisplayHoursF2 = 0
         }else{ DisplayHoursF2 = ""}
 
-        let finalResult = "" + DisplayHoursF2 + hoursF2 + " : " + DisplayMinutesF2 + minutesF2 + " : " + DisplaySecondsF2 + secondsRest + " : " + DisplayMiliSecondsF2 + miliSecondsF2
+        let finalResult = "" + DisplayHoursF2 + hoursF2 + " : " + DisplayMinutesF2 + minutesF2 + " : " + DisplaySecondsF2 + secondsRest + " ," + DisplayMiliSecondsF2 + miliSecondsF2
 
-        console.log(finalMsResult)
+        // console.log(finalMsResult)
 
-        // setCountLapF2([...countLapF2, miliSecondsLap]) 
+        //Guarda o valor da volta em MS para calcular a maior e menor volta no arquivo listLap.js
+        setMsResult([...msResult, finalMsResult])
+        console.log(msResult)
+        
+        // setCountLapF2([...countLapF2, finalMsResult]) 
         setCountLapF2([...countLapF2, finalResult]) 
 
-        // console.log(miliSecondsLap)
+        // console.log(countLapF2)
+        console.log(finalMsResult)
     }
     
 
@@ -242,17 +259,19 @@ function Counter (){
 
     return(
         <div>
-            <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} : {displayMiliSeconds}{miliSeconds}</h1>
-            <button onClick={play}>Play</button>
-            <button onClick={pause} >Pause</button>
-            <button onClick={lapFunction2} > Lap </button>
-            {/* <button onClick={playPause} >Play</button> */}
-            <button onClick={reset} >Reset</button>            
-            {/* <button onClick={lapFunction} > Lap </button> */}
-            {/* <p>{lap}</p> */}
-            {/* <ListLaps lap = {lap}  ></ListLaps> */}
-            {/* <ListLaps countLap = {countLap}  ></ListLaps> */}
-            <ListLaps countLapF2 = {countLapF2}  ></ListLaps>
+            <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} ,{displayMiliSeconds}{miliSeconds}</h1>
+            <div className="container">
+                <button onClick={play}>Play</button>
+                <button onClick={pause} >Pause</button>
+                <button onClick={lapFunction2} > Lap </button>
+                {/* <button onClick={playPause} >Play</button> */}
+                <button onClick={reset} >Reset</button>            
+                {/* <button onClick={lapFunction} > Lap </button> */}
+                {/* <p>{lap}</p> */}
+                {/* <ListLaps lap = {lap}  ></ListLaps> */}
+                {/* <ListLaps countLap = {countLap}  ></ListLaps> */}
+            </div>            
+            <ListLaps countLapF2 = {countLapF2} msResult = {msResult} ></ListLaps>
         </div>
     )
     
