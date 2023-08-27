@@ -155,6 +155,7 @@ function Counter (){
 
         setLapF2([...lapF2,NEWLAPF2])
 
+        //metodo pop pega a ultima string do array
         let lastStringLapF2 = lapF2.pop()  
 
         if(lastStringLapF2 == undefined){
@@ -185,7 +186,7 @@ function Counter (){
         let hoursF2 = Math.floor(minutesF2 / 60)
         let secondsRest = secondsF2 % 60
 
-        //variaveis responsaveis por ser 0 se o contador for menor do que 10
+        //variaveis responsaveis por ser 0 (0 que fica a frente) se o contador for menor do que 10
         let DisplayMiliSecondsF2
         let DisplaySecondsF2
         let DisplayMinutesF2
@@ -211,7 +212,7 @@ function Counter (){
             DisplayHoursF2 = 0
         }else{ DisplayHoursF2 = ""}
 
-        let finalResult = "" + DisplayHoursF2 + hoursF2 + " : " + DisplayMinutesF2 + minutesF2 + " : " + DisplaySecondsF2 + secondsRest + " ," + DisplayMiliSecondsF2 + miliSecondsF2
+        let finalResult = "" + DisplayHoursF2 + hoursF2 + ":" + DisplayMinutesF2 + minutesF2 + ":" + DisplaySecondsF2 + secondsRest + "," + DisplayMiliSecondsF2 + miliSecondsF2
 
         // console.log(finalMsResult)
 
@@ -225,6 +226,21 @@ function Counter (){
         // console.log(countLapF2)
         console.log(finalMsResult)
     }
+
+    // const BotaoPlayPause = () => {
+    //     const [estado, setEstado] = useState('play')
+    //     const alternarEstado = () => {
+    //         if(estado === 'play'){
+    //             setEstado('pause')
+    //             play()
+    //             console.log("play")
+    //         }else{
+    //             setEstado('play')
+    //             pause()
+    //             console.log("pause")
+    //         }
+    //     }
+    // }
     
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -258,11 +274,12 @@ function Counter (){
 
 
     return(
-        <div>
+        <div className="display" >
             <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} ,{displayMiliSeconds}{miliSeconds}</h1>
             <div className="container">
                 <button onClick={play}>Play</button>
                 <button onClick={pause} >Pause</button>
+                {/* <BotaoPlayPause onClick={alternarEstado}>{estado ==='play' ? 'playT' : 'pauseT'}</BotaoPlayPause> */}
                 <button onClick={lapFunction2} > Lap </button>
                 {/* <button onClick={playPause} >Play</button> */}
                 <button onClick={reset} >Reset</button>            

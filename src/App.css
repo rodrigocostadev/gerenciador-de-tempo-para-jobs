@@ -5,7 +5,7 @@
   text-align: center;
   font-size: 2rem;
   display: flex;
-  /* align-items:center ; */
+  align-items:center ;
   justify-content: center;
 }
 
@@ -16,15 +16,37 @@ body{
 button{
   /* margin-top: 100px; */
   padding: 10px;
-  font-size: 30px;
+  font-size: 33px;
   border-radius: 15px;
   border-width: 8px;
-  border-color: blue;
+  font-family: 'Goldman', cursive;
 }
-li{
-  list-style: none;
+button:hover{
+  color: red;
+  /* color: white; */
+  background-color: darkred;
+  cursor: pointer;
+  transition: 300ms;
+  transform: scale(1.1);
 
 }
+
+li{
+  margin-top: 5px;
+  list-style: none;
+  background-color: darkred;
+  /* font-family: 'Iceberg', cursive; */
+  font-family: 'Oxanium', cursive;
+
+  color: white;
+}
+h1{
+  font-family: 'Oxanium', cursive;
+
+}
+/* .app{
+  position: relative;
+} */
 /* .green{
   color: green;
 } */
