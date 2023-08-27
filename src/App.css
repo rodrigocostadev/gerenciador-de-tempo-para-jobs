@@ -35,14 +35,14 @@ li{
   margin-top: 5px;
   list-style: none;
   background-color: darkred;
-  /* font-family: 'Iceberg', cursive; */
   font-family: 'Oxanium', cursive;
-
+  text-align: center;
   color: white;
+  margin-right: 7%;
+  justify-content: center;
 }
 h1{
   font-family: 'Oxanium', cursive;
-
 }
 /* .app{
   position: relative;
