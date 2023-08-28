@@ -97,7 +97,6 @@ function Counter (){
 
         // Elimina a execução em paralelo de outras funções contadoras, assim DEIXANDO DE ACELERAR O CONTADOR
         if(!intervalo){
-
             setIntervalo(setInterval(() => {
                 increment()
                 timerFunction()
@@ -183,6 +182,7 @@ function Counter (){
         let miliSecondsF2 = String(finalMsResult).slice(-2)
         let secondsF2 = Math.floor(finalMsResult / 100)
         let minutesF2 = Math.floor(secondsF2 / 60)
+        // const [ MinutesF3, setMinutesF3] = useState(minutesF2)
         let hoursF2 = Math.floor(minutesF2 / 60)
         let secondsRest = secondsF2 % 60
 
@@ -206,6 +206,15 @@ function Counter (){
         if(minutesF2 < 10){
             DisplayMinutesF2 = 0
         }else{ DisplayMinutesF2 = ""}
+        
+            // laço de repetição para evitar que apareça mais de 60 nos minutos no contador de voltas, 
+            // ex: apareceria 2 horas e 67 minutos, com o laço aparece 2 horas e 7 minutos
+        for( let i = 0; i < 60 ; i++){
+            if(minutesF2 >= 60){
+                DisplayMinutesF2 = 0
+                minutesF2 = (minutesF2 - 60)
+            }
+        }
 
         //Hours
         if(hoursF2 < 10){

@@ -1,16 +1,24 @@
 #root{
   max-width: 1280px;
-  margin: 0;
+  /* margin: 0; */
+  margin: auto;
   padding: 2rem;
   text-align: center;
   font-size: 2rem;
   display: flex;
   align-items:center ;
   justify-content: center;
+  /* background-color: red; */
 }
 
 body{
   background-color: grey;
+  /* background-color: red; */
+  margin: 0;
+  padding: 0;
+  /* display: flex;
+  align-items:center ;
+  justify-content: center; */
 }
 
 button{
@@ -43,6 +51,7 @@ li{
 }
 h1{
   font-family: 'Oxanium', cursive;
+  font-size: 75px;
 }
 /* .app{
   position: relative;
@@ -56,5 +65,35 @@ h1{
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 150px;
+  height: 100px;
+}
+
+@media screen and (max-width:550px) {
+  h1{
+    font-size: 60px;
+  }
+  button{
+    font-size: 25px;
+  }
+  li{
+    font-size: 25px;
+  }
+  .container{
+    height: 50px;
+  }
+}
+
+@media screen and (max-width:450px) {
+  h1{
+    font-size: 50px;
+  }
+  button{
+    font-size: 20px;
+  }
+  li{
+    font-size: 20px;
+  }
+  .container{
+    height: 40px;
+  }
 }

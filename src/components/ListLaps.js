@@ -66,7 +66,7 @@ function ListLaps (props){
             {/* {props.lap.map( item => */}
             {props.countLapF2.map( item =>
                 <li key={item.id} id= {indice++}>
-                    Lap{numberLap++}  {item}
+                    Lap{numberLap++} ---  {item}
                 </li>)
             }
             
