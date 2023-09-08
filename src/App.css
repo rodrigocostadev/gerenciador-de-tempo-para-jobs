@@ -1,6 +1,5 @@
 #root{
   max-width: 1280px;
-  /* margin: 0; */
   margin: auto;
   padding: 2rem;
   text-align: center;
@@ -16,9 +15,6 @@ body{
   /* background-color: red; */
   margin: 0;
   padding: 0;
-  /* display: flex;
-  align-items:center ;
-  justify-content: center; */
 }
 
 button{
@@ -42,7 +38,7 @@ button:hover{
 li{
   margin-top: 5px;
   list-style: none;
-  background-color: darkred;
+  /* background-color: darkred; */
   font-family: 'Oxanium', cursive;
   text-align: center;
   color: white;
@@ -53,15 +49,19 @@ h1{
   font-family: 'Oxanium', cursive;
   font-size: 75px;
 }
-/* .app{
-  position: relative;
-} */
-/* .green{
-  color: green;
-} */
+.green{
+  background-color: green;
+}
+.red{
+  background-color: red;
+}
+.black{
+  background-color: black;
+}
+.darkred{
+  background-color: darkred;
+}
 .container{
-  /* position: relative; */
-  /* display: grid; */
   display: flex;
   align-items: center;
   justify-content: space-around;

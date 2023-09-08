@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import Laps from "./Laps";
-// import LapClass from "./LapClass";
 import ListLaps from "./ListLaps";
-
-
 
 function Counter (){
 
@@ -19,6 +15,7 @@ function Counter (){
     const [displayHours, setDisplayHours] = useState(0)
     const [hours, setHours] = useState(0)
 
+    //pega o intervalo entre play/pause e play/reset "reset que roda a função pause"
     const [intervalo, setIntervalo] = useState()
 
     //calcula o intervalo de volta Lap
@@ -26,9 +23,7 @@ function Counter (){
 
     const[lapF2, setLapF2] = useState([])
 
-
-    // let isPlaying = false
-
+    // console.log(Date.parse)
 
     useEffect(() => {
         timerFunction()
@@ -87,11 +82,6 @@ function Counter (){
         setMillisecondsLap((prevMiliSecondsLap) => prevMiliSecondsLap + 1  )
     }
 
-    // function playPause(){
-
-    //     isPlaying? play() : pause()
-    // }
-
 
     function play(){              
 
@@ -102,8 +92,6 @@ function Counter (){
                 timerFunction()
             }, 10))   
         }
-
-        // isPlaying = true
     }
 
     function pause(){
@@ -113,8 +101,6 @@ function Counter (){
             clearInterval(intervalo)
             setIntervalo()
         }
-
-        // isPlaying = false
     }
 
     function reset(){
@@ -133,10 +119,11 @@ function Counter (){
         setCountLapF2([])
         setMillisecondsLap(0)
         setLapF2([])
+        setMsResult([])
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////// 2 TENTATIVA CALCULAR VOLTA COM MILISECONDSLAP /////////////////////////////////////////////////
+    //////////////////////////////////////// 2 TENTATIVA DE CALCULAR VOLTA COM MILISECONDSLAP /////////////////////////////////////////////////
 
     //Mostra o tempo de volta calculado
     const [countLapF2, setCountLapF2] =useState([])
@@ -144,45 +131,31 @@ function Counter (){
     //Guarda o valor da volta em MS para calcular a maior e menor volta no arquivo listLap.js
     const [ msResult, setMsResult] = useState([])
 
-    // const[lapF2, setLapF2] = useState([])
     let NEWLAPF2 = miliSecondsLap 
 
-    // let newArray 
-    // newArray = localStorage.getItem("valoresNewArray")
 
     function lapFunction2(){        
 
         setLapF2([...lapF2,NEWLAPF2])
 
-        //metodo pop pega a ultima string do array
+        //metodo pop pega a ultima string do array 
         let lastStringLapF2 = lapF2.pop()  
 
         if(lastStringLapF2 == undefined){
             lastStringLapF2 = 0
         }         
 
-        let finalMsResult = miliSecondsLap - lastStringLapF2
-
-        // newArray.push([finalMsResult])
-        // console.log(newArray)
-
-        // for(let i=0; i< newArray.length; i++){
-        //     newArray.push(...finalMsResult)
-        //     localStorage.setItem( "valoresNewArray", newArray)
-        // }
-
-        
+        let finalMsResult = miliSecondsLap - lastStringLapF2        
 
         // console.log(lastStringLapF2)
         // console.log(miliSecondsLap)
-        // console.log(newArray)
         console.log(lapF2)
 
-        // tive que transformar numero ( intervalo de volta, ou milisecondsLap )em string para pegar os 2 ultimos digitos 
+        // tive que transformar numero "finalMsResult"( intervalo de volta, ou milisecondsLap )em string 
+        // para pegar os 2 ultimos digitos com o metodo slice 
         let miliSecondsF2 = String(finalMsResult).slice(-2)
         let secondsF2 = Math.floor(finalMsResult / 100)
         let minutesF2 = Math.floor(secondsF2 / 60)
-        // const [ MinutesF3, setMinutesF3] = useState(minutesF2)
         let hoursF2 = Math.floor(minutesF2 / 60)
         let secondsRest = secondsF2 % 60
 
@@ -213,6 +186,7 @@ function Counter (){
             if(minutesF2 >= 60){
                 DisplayMinutesF2 = 0
                 minutesF2 = (minutesF2 - 60)
+                console.log("laço")
             }
         }
 
@@ -223,8 +197,6 @@ function Counter (){
 
         let finalResult = "" + DisplayHoursF2 + hoursF2 + ":" + DisplayMinutesF2 + minutesF2 + ":" + DisplaySecondsF2 + secondsRest + "," + DisplayMiliSecondsF2 + miliSecondsF2
 
-        // console.log(finalMsResult)
-
         //Guarda o valor da volta em MS para calcular a maior e menor volta no arquivo listLap.js
         setMsResult([...msResult, finalMsResult])
         console.log(msResult)
@@ -233,7 +205,7 @@ function Counter (){
         setCountLapF2([...countLapF2, finalResult]) 
 
         // console.log(countLapF2)
-        console.log(finalMsResult)
+        // console.log(finalMsResult)
     }
 
     // const BotaoPlayPause = () => {
@@ -322,7 +294,7 @@ export default Counter
 
 
 
-
+//Daqui pra baixo foi a primeira função lap function criada para pegar as voltas, porem essa maneira nao funcionou de maneira correta
 
 /////////////////////////////  Função lap function antiga juntamente com as variaveis anteriores   /////////////////////////////////////////////////////
 
