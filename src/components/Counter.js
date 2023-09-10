@@ -270,6 +270,9 @@ function Counter (){
                 {/* <ListLaps countLap = {countLap}  ></ListLaps> */}
             </div>            
             <ListLaps countLapF2 = {countLapF2} msResult = {msResult} ></ListLaps>
+            <div className="credits" >
+                <p>Criado e Desenvolvido por <a target="blank" href="https://linktr.ee/rodrigocostadev">Rodrigo Costa</a></p>
+            </div>
         </div>
     )
     
