@@ -13,10 +13,10 @@ function ListLaps (props){
     let menorValor = Math.min.apply(null, props.msResult );
     let indiceMenorValor = props.msResult.indexOf(menorValor)
 
-    console.log(props.msResult)
-    console.log(maiorValor)
-    console.log(indiceMaiorValor + " Maior")
-    console.log(indiceMenorValor + " Menor")
+    // console.log(props.msResult)
+    // console.log(maiorValor)
+    // console.log(indiceMaiorValor + " Maior")
+    // console.log(indiceMenorValor + " Menor")
 
     // Esse return pega o maior valor e deixa na cor vermelha, e o menor valor deixa na cor verde
     return(

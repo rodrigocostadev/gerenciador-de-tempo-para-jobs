@@ -149,7 +149,7 @@ function Counter (){
 
         // console.log(lastStringLapF2)
         // console.log(miliSecondsLap)
-        console.log(lapF2)
+        // console.log(lapF2)
 
         // tive que transformar numero "finalMsResult"( intervalo de volta, ou milisecondsLap )em string 
         // para pegar os 2 ultimos digitos com o metodo slice 
@@ -186,7 +186,7 @@ function Counter (){
             if(minutesF2 >= 60){
                 DisplayMinutesF2 = 0
                 minutesF2 = (minutesF2 - 60)
-                console.log("laço")
+                // console.log("laço")
             }
         }
 
@@ -199,7 +199,7 @@ function Counter (){
 
         //Guarda o valor da volta em MS para calcular a maior e menor volta no arquivo listLap.js
         setMsResult([...msResult, finalMsResult])
-        console.log(msResult)
+        // console.log(msResult)
         
         // setCountLapF2([...countLapF2, finalMsResult]) 
         setCountLapF2([...countLapF2, finalResult]) 
