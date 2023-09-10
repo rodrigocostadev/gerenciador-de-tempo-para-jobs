@@ -90,7 +90,7 @@ function Counter (){
             setIntervalo(setInterval(() => {
                 increment()
                 timerFunction()
-            }, 10))   
+            }, 1))   
         }
     }
 
