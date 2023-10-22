@@ -15,6 +15,11 @@ function Counter (){
     const [displayHours, setDisplayHours] = useState(0)
     const [hours, setHours] = useState(0)
 
+    // guarda o estado para verdadeiro ou falso o botão play/pause, para rodar função
+    const [estatePlay, setEstatePlay] = useState(false)
+    //  guarda o estado para mostrar no botão, alternando de play para pause 
+    const [valueButton, setValueButton] = useState("Play")
+
     //pega o intervalo entre play/pause e play/reset "reset que roda a função pause"
     const [intervalo, setIntervalo] = useState()
 
@@ -100,6 +105,22 @@ function Counter (){
             clearInterval(intervalo)
             setIntervalo()
         }
+    }
+
+    const ButtonPlayPause = () => {        
+        
+            if(estatePlay === false ){
+                setEstatePlay(true)
+                play()
+                // console.log("play")
+                setValueButton("Pause")
+            }else if ( estatePlay === true){
+                setEstatePlay(false)
+                pause()
+                // console.log("pause")
+                setValueButton(" Play ")
+            }
+        
     }
 
     function reset(){
@@ -206,25 +227,6 @@ function Counter (){
         // console.log(countLapF2)
         // console.log(finalMsResult)
     }
-
-    const [estado, setEstado] = useState(false)
-    const [valueButton, setValueButton] = useState("Play")
-
-    const BotaoPlayPause = () => {        
-        
-            if(estado === false ){
-                setEstado(true)
-                play()
-                // console.log("play")
-                setValueButton("Pause")
-            }else if ( estado === true){
-                setEstado(false)
-                pause()
-                // console.log("pause")
-                setValueButton(" Play ")
-            }
-        
-    }
     
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,7 +263,7 @@ function Counter (){
         <div className="display" >
             <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} ,{displayMiliSeconds}{miliSeconds}</h1>
             <div className="container">
-                <button onClick={BotaoPlayPause} >{valueButton}</button>
+                <button onClick={ButtonPlayPause} >{valueButton}</button>
                 {/* <button onClick={play}>Play</button> */}
                 {/* <button onClick={pause} >Pause</button> */}
                 {/* <BotaoPlayPause onClick={alternarEstado}>{estado ==='play' ? 'playT' : 'pauseT'}</BotaoPlayPause> */}
