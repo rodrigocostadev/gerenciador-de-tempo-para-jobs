@@ -27,7 +27,6 @@ function Counter (){
 
     useEffect(() => {
         timerFunction()
-        // lapFunction()
     },[miliSeconds])
 
 
@@ -40,7 +39,7 @@ function Counter (){
             setDisplayMiliSeconds("0")
         }
 
-        if (miliSeconds == 100){
+        if (miliSeconds === 100){
             setDisplayMiliSeconds(0)
             setMIliSeconds(0)
             setSeconds((prevSeconds) => prevSeconds + 1)
@@ -54,24 +53,24 @@ function Counter (){
         }else if(seconds < 10){
             setDisplaySeconds("0")
         }
-        if (seconds == 60){
+        if (seconds === 60){
             setSeconds(0)
             setMinutes((prevMinutes) => prevMinutes + 1  )
             setDisplaySeconds(0)     
         }
 
         //Minutes
-        if (minutes == 10){
+        if (minutes === 10){
             setDisplayMinutes("")
         }
-        if (minutes == 60){
+        if (minutes === 60){
             setMinutes(0)
             setHours((prevHours) => prevHours + 1  )
             setDisplayMinutes(0)
         }    
 
         //Hours
-        if (hours == 10){
+        if (hours === 10){
             setDisplayHours("")
         }    
     }
@@ -141,7 +140,7 @@ function Counter (){
         //metodo pop pega a ultima string do array 
         let lastStringLapF2 = lapF2.pop()  
 
-        if(lastStringLapF2 == undefined){
+        if(lastStringLapF2 === undefined){
             lastStringLapF2 = 0
         }         
 
@@ -166,7 +165,7 @@ function Counter (){
         let DisplayHoursF2
 
         //Miliseconds
-        if(miliSecondsF2 == 0){
+        if(miliSecondsF2 === 0){
             DisplayMiliSecondsF2 = 0
         }else{ DisplayMiliSecondsF2 = ""}
 
@@ -208,20 +207,24 @@ function Counter (){
         // console.log(finalMsResult)
     }
 
-    // const BotaoPlayPause = () => {
-    //     const [estado, setEstado] = useState('play')
-    //     const alternarEstado = () => {
-    //         if(estado === 'play'){
-    //             setEstado('pause')
-    //             play()
-    //             console.log("play")
-    //         }else{
-    //             setEstado('play')
-    //             pause()
-    //             console.log("pause")
-    //         }
-    //     }
-    // }
+    const [estado, setEstado] = useState(false)
+    const [valueButton, setValueButton] = useState("Play")
+
+    const BotaoPlayPause = () => {        
+        
+            if(estado === false ){
+                setEstado(true)
+                play()
+                // console.log("play")
+                setValueButton("Pause")
+            }else if ( estado === true){
+                setEstado(false)
+                pause()
+                // console.log("pause")
+                setValueButton(" Play ")
+            }
+        
+    }
     
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -258,8 +261,9 @@ function Counter (){
         <div className="display" >
             <h1>{displayHours}{hours} : {displayMinutes}{minutes} : {displaySeconds}{seconds} ,{displayMiliSeconds}{miliSeconds}</h1>
             <div className="container">
-                <button onClick={play}>Play</button>
-                <button onClick={pause} >Pause</button>
+                <button onClick={BotaoPlayPause} >{valueButton}</button>
+                {/* <button onClick={play}>Play</button> */}
+                {/* <button onClick={pause} >Pause</button> */}
                 {/* <BotaoPlayPause onClick={alternarEstado}>{estado ==='play' ? 'playT' : 'pauseT'}</BotaoPlayPause> */}
                 <button onClick={lapFunction2} > Lap </button>
                 {/* <button onClick={playPause} >Play</button> */}
