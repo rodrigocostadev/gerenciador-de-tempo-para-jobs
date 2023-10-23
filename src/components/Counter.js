@@ -125,6 +125,8 @@ function Counter (){
 
     function reset(){
         pause()
+        setEstatePlay(false)
+        setValueButton(" Play ")
         setMIliSeconds(0)
         setDisplayMiliSeconds(0)
         setSeconds(0)
